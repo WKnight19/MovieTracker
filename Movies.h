@@ -8,6 +8,8 @@
 
 using namespace std;
 
+class Data;
+
 /************************************************************
   This class has access to private members of movie, however only this class interacts with main, encapsulating Movie
 
@@ -15,6 +17,8 @@ using namespace std;
 *************************************************************/
 class Movies
 {
+  friend Data;
+
 private:
   vector<Movie> movies_list;
 public:
@@ -23,6 +27,7 @@ public:
   These are the constructors and destructors
 *************************************************************/
   Movies();
+  vector<Movie> get_movies_list();
 
   /************************************************************
     These are the core functions of the class
@@ -31,11 +36,11 @@ public:
     - indicate that you have watched a movie
   *************************************************************/
   void display_movies();
-  void add_movie(string name = "None", string rating = "NR");
+  void add_movie(string name = "None", string rating = "NR", int watch_count = 1);
   void watched_movie(string name);
 
+  void write_movie_to_file(ofstream &, string userid);
 
-  
   /************************************************************
     These are the error message methods for failures to add to the vector and failure to find the movie in the vector
   *************************************************************/

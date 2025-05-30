@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include "Movies.h"
 
 
@@ -7,8 +9,12 @@
 *************************************************************/
 
 Movies::Movies() {
-  vector<Movie> newVec(0);
-  movies_list = newVec;
+  vector<Movie>* newVec = new vector<Movie>;
+  movies_list = *newVec;
+}
+
+vector<Movie> Movies::get_movies_list(){
+  return movies_list;
 }
 
 void Movies::display_movies(){
@@ -19,10 +25,10 @@ void Movies::display_movies(){
        << endl;
 }
 
-void Movies::add_movie(string name, string rating){
+void Movies::add_movie(string name, string rating, int watch_count){
   if (unable_to_add(name) == true)
   {
-  Movie new_movie{name, rating};
+  Movie new_movie{name, rating, watch_count};
   movies_list.push_back(new_movie);
   }
 
@@ -88,4 +94,11 @@ bool Movies::check_if_exists(string name){
   }
 
   return false;
+}
+
+
+void Movies::write_movie_to_file(ofstream& outFile, string userid){
+  for(const auto& var : movies_list) { // check every movie in list
+      outFile << userid << "," << var.name << "," << var.rating << "," << var.watch_count << endl;
+  }
 }
