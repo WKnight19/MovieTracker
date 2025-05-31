@@ -12,7 +12,8 @@ using namespace std;
 class Movie;
 class Movies;
 
-class Data {
+class Data
+{
 
   friend Movie;
   friend Movies;
@@ -29,19 +30,18 @@ private:
 
 public:
   // public members
-  Data(string filename = "data.csv");
+  Data(string filename = "/home/wheeler/udemy/cpp_beginner/13-OOP/GitChallenge/MovieTracker/MoviePP_V2/src/data/data.csv");
   string get_user_id();
   void set_user_id(string);
   vector<vector<string>> get_csv_data();
 
-  bool check_file_open(const ifstream& file);
+  bool check_file_open(const ifstream &file);
   bool add_data(const string &filename, ifstream &file, string &line, vector<vector<string>> &csvData);
   bool close_file(ifstream &file);
 
-  void write_to_csv(Movies&); // outputs to csv file
+  void write_to_csv(Movies &); // outputs to csv file
 
   void print_data_test(vector<vector<string>> &csvData);
-
 };
 
-#endif 
+#endif
